@@ -15,11 +15,12 @@ while ($true) {
     }
 }
 
-$model = Read-Host -Prompt "Enter the ollama model to pull (e.g., qwen2:0.5b)"
+$model = $args[0]
 if (-not $model) {
     Write-Host "No model specified. Exiting."
     exit 0
 }
+
 Write-Host "Pulling the Ollama model ($model)..."
 docker-compose exec ollama ollama pull $model
 

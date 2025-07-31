@@ -15,7 +15,7 @@ while ! docker-compose exec ollama ollama list >/dev/null 2>&1; do
 done
 echo -e "\nOllama service is ready."
 
-read -p "Enter the ollama model to pull (e.g., qwen2:0.5b): " model
+model=$1
 if [ -z "$model" ]; then
     echo "No model specified. Exiting."
     exit 0
@@ -25,4 +25,4 @@ docker-compose exec ollama ollama pull "$model"
 
 echo -e "
 To use the tool, run a command like this:"
-echo 'docker-compose exec app python src/cli.py -url "https://ollama.com" -model "qwen3:0.6b"  -prompt "Summarize the main features." -output-file "summary.txt"'
+echo 'docker-compose exec app python src/cli.py -url "https://ollama.com" -model "gemma3:1b"  -prompt "Summarize the main features." -output-file "summary.txt"'
