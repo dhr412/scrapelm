@@ -1,0 +1,65 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Make run.sh executable
+      run: chmod +x ./run.sh
+
+    - name: Run setup script
+      run: ./run.sh gemma3:1b
+
+    - name: Run scraping test
+      run: |
+        docker-compose run --rm \
+          -v ${{ github.workspace }}:/app \
+          app \
+          python src/cli.py \
+            --url "https://ollama.com/blog" \
+            --model "gemma3:1b" \
+            --prompt "Bullet out the latest four blog posts." \
+            --output-file "build-test.txt"
+
+    - name: Check for output file
+      run: |
+        if [ ! -f build-test.txt ]; then
+          echo "::error::Output file 'build-test.txt' was not created."
+          exit 1
+        fi
+        echo "Output file 'build-test.txt' created successfully."
+        echo "---"
+        cat build-test.txt
+        echo "---"
+
+    - name: Upload test output
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-output
+        path: build-test.txt
+
+    - name: Stop services
+      if: always()
+      run: docker-compose down --volumes
