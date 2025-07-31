@@ -7,6 +7,8 @@ on:
       - 'src/**'
       - 'Dockerfile'
       - 'docker-compose.yml'
+      - 'run.sh'
+      - 'run.ps1'
   pull_request:
     branches: [ main ]
     paths:
