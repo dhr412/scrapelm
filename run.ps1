@@ -20,7 +20,6 @@ if (-not $model) {
     Write-Host "No model specified. Exiting."
     exit 0
 }
-
 Write-Host "Pulling the Ollama model ($model)..."
 docker-compose exec ollama ollama pull $model
 
