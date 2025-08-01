@@ -1,4 +1,4 @@
-name: GHCR Image CI
+name: GHCR Image CD
 
 on:
   push:
