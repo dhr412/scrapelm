@@ -1,6 +1,6 @@
 # ScrapeLM
 
-`ScrapeLM` is a command-line tool that scrapes a website's text content and uses a local Large Language Model (LLM) via Ollama to answer questions based on the scraped information.
+`ScrapeLM` is a command-line tool that scrapes a website's text content and uses a local LLM via Ollama to answer questions based on the scraped information.
 
 ## Features
 
