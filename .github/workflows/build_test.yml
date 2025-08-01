@@ -1,20 +1,7 @@
 name: Build and Test
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'src/**'
-      - 'Dockerfile'
-      - 'docker-compose.yml'
-      - 'run.sh'
-      - 'run.ps1'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'src/**'
-      - 'Dockerfile'
-      - 'docker-compose.yml'
+  workflow_call:
   workflow_dispatch:
 
 jobs:
