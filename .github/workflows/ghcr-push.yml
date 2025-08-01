@@ -14,7 +14,7 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/build-and-test.yml
+    uses: ./.github/workflows/build_test.yml
 
   build:
     name: Build and Push to GHCR
