@@ -1,18 +1,27 @@
 name: GHCR Image CI
 
 on:
-  workflow_run:
-    workflows: ["Build and Test"]
-    types:
-      - completed
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'run.sh'
+      - 'run.ps1'
+  workflow_dispatch:
 
 jobs:
+  test:
+    uses: ./.github/workflows/build-and-test.yml
+
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Build and Push to GHCR
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Log in to GitHub Container Registry
