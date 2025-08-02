@@ -10,29 +10,28 @@ if __name__ == "__main__":
         description="Scrape a website and use an Ollama LLM to process the content."
     )
     parser.add_argument(
-        "-url",
+        "--url", "-url",
         required=True,
-        help="The URL of the website to scrape."
+        help="URL of the website to scrape"
     )
     parser.add_argument(
-        "-output-dir",
-        help="Directory to save the intermediate scraped text file. Defaults to a temporary directory."
+        "--output-dir", "-output-dir",
+        help="Directory to save the intermediate scraped text file. Defaults to a temporary directory"
     )
     parser.add_argument(
-        "-model",
+        "--model", "-model",
         required=True,
-        help="The name of the Ollama model to use (e.g., 'llama2', 'phi3')."
+        help="Name of the Ollama model to use"
     )
     parser.add_argument(
-        "-prompt",
+        "--prompt", "-prompt",
         required=True,
-        help="The specific question or retrieval instruction for the LLM."
+        help="The specific question or retrieval instruction for the LLM"
     )
     parser.add_argument(
-        "-output-file",
-        help="File to save the final LLM response. Defaults to printing to console."
+        "--output-file", "-output-file",
+        help="File to save the final LLM response. Defaults to printing to console"
     )
-
     args = parser.parse_args()
 
     try:
