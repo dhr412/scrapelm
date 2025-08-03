@@ -28,14 +28,11 @@ jobs:
 
     - name: Run scraping test
       run: |
-        docker compose run --rm \
-          -v ${{ github.workspace }}:/app \
-          app \
-          ./scrapelm \
-            --url "https://ollama.com/blog" \
-            --model "gemma3:1b" \
-            --prompt "Bullet out the latest four blog posts." \
-            --output-file "build-test.txt"
+        docker compose run --rm app ./scrapelm \
+          --url "https://ollama.com/blog" \
+          --model "gemma3:1b" \
+          --prompt "Bullet out the latest four blog posts." \
+          --output-file "build-test.txt"
 
     - name: Check for output file
       run: |
