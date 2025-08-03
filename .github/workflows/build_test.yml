@@ -21,6 +21,11 @@ jobs:
     - name: Run setup script
       run: ./run.sh gemma3:1b
 
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: "stable"
+
     - name: Run scraping test
       run: |
         docker compose run --rm \
