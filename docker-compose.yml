@@ -31,4 +31,6 @@ services:
       - OLLAMA_HOST=http://ollama:11434
     tty: true
     working_dir: /app
+    volumes:
+        - .:/app
     command: ["tail", "-f", "/dev/null"]
