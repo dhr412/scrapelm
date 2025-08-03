@@ -46,17 +46,12 @@ This is the easiest way to get started, as it handles all dependencies, includin
 
 Follow these steps if you prefer to run the application without Docker.
 
-1. **Clone the repository:**
+1. **Prerequisites**: Make sure you have [Go](https://go.dev/doc/install) installed.
+2. **Clone the repository:**
 
     ```bash
     git clone https://github.com/dhr412/scrapelm.git
     cd scrapelm
-    ```
-
-2. **Install Python dependencies:**
-
-    ```bash
-    pip install -r requirements.txt
     ```
 
 3. **Install and run Ollama:**
@@ -78,7 +73,7 @@ Once the containers are running, you can execute commands like this:
 **Basic Example**
 
 ```bash
-docker-compose exec app python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "What is this page about?"
+docker-compose exec app go run src/scrapelm.go --url "https://example.com" --model "gemma3:1b" --prompt "What is this page about?"
 ```
 
 **Saving the Output**
@@ -86,19 +81,25 @@ docker-compose exec app python src/cli.py -url "https://example.com" -model "gem
 To save the LLM's response to a file in your local directory:
 
 ```bash
-docker-compose exec app python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "Summarize the main points." -output-file "summary.txt"
+docker-compose exec app go run src/scrapelm.go --url "https://example.com" --model "gemma3:1b" --prompt "Summarize the main points." --output-file "summary.txt"
 ```
 
 ### Local Usage
 
-Run the script from the root of the project directory. The tool requires a URL, a model name, and a prompt.
+First, build the application from the root of the project directory:
+
+```bash
+go build -o scrapelm src/scrapelm.go
+```
+
+Then, you can run the compiled binary. The tool requires a URL, a model name, and a prompt.
 
 **Basic Example**
 
 To scrape a website and ask a question, printing the output to the console:
 
 ```bash
-python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "What is this page about?"
+./scrapelm --url "https://example.com" --model "gemma3:1b" --prompt "What is this page about?"
 ```
 
 **Saving the Output**
@@ -106,7 +107,7 @@ python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "What is
 To save the LLM's response to a file:
 
 ```bash
-python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "Summarize the main points." -output-file "summary.txt"
+./scrapelm --url "https://example.com" --model "gemma3:1b" --prompt "Summarize the main points." --output-file "summary.txt"
 ```
 
 ---
@@ -115,11 +116,11 @@ python src/cli.py -url "https://example.com" -model "gemma3:1b" -prompt "Summari
 
 | Flag            | Description                                                                 | Required |
 |-----------------|-----------------------------------------------------------------------------|----------|
-| `-url`          | The URL of the website to scrape.                                           | Yes      |
-| `-model`        | The name of the Ollama model to use (e.g., `gemma3:1b`, `llama3`).               | Yes      |
-| `-prompt`       | The specific question or instruction for the LLM.                           | Yes      |
-| `-output-dir`   | Directory to save the intermediate scraped text file. Defaults to a temp dir. | No       |
-| `-output-file`  | File to save the final LLM response. Defaults to printing to the console.   | No       |
+| `--url`          | The URL of the website to scrape.                                           | Yes      |
+| `--model`        | The name of the Ollama model to use (e.g., `gemma3:1b`, `llama3`).               | Yes      |
+| `--prompt`       | The specific question or instruction for the LLM.                           | Yes      |
+| `--output-dir`   | Directory to save the intermediate scraped text file. Defaults to a temp dir. | No       |
+| `--output-file`  | File to save the final LLM response. Defaults to printing to the console.   | No       |
 
 ## License
 
