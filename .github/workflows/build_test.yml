@@ -31,7 +31,7 @@ jobs:
         docker compose run --rm \
           -v ${{ github.workspace }}:/app \
           app \
-          go run src/scrapelm.go \
+          ./scrapelm \
             --url "https://ollama.com/blog" \
             --model "gemma3:1b" \
             --prompt "Bullet out the latest four blog posts." \
