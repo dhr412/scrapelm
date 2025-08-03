@@ -1,15 +1,14 @@
-FROM python:3.12-slim as builder
+FROM golang:1.24.5-alpine AS builder
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY ./go.mod ./go.sum ./
+RUN go mod download
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY src/scrapelm.go .
 
-FROM python:3.12-slim
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o ./scrapelm
 
-WORKDIR /app
+FROM alpine:latest
 
-COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
-
-COPY src/ .
+COPY --from=builder /app/scrapelm ./scrapelm

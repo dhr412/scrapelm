@@ -24,4 +24,4 @@ echo "Pulling the Ollama model ($model)..."
 docker compose exec ollama ollama pull "$model"
 
 echo -e "To use the tool, run a command like this:"
-echo 'docker compose exec app python src/cli.py -url "https://ollama.com" -model "gemma3:1b"  -prompt "Summarize the main features." -output-file "summary.txt"'
+echo 'docker compose exec app ./scrapelm -url "https://ollama.com" -model "gemma3:1b"  -prompt "Summarize the main features." -output-file "summary.txt"'

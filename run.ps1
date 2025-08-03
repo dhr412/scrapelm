@@ -24,4 +24,4 @@ Write-Host "Pulling the Ollama model ($model)..."
 docker compose exec ollama ollama pull $model
 
 Write-Host "`nTo use the tool, run a command like this:"
-Write-Host 'docker compose exec app python src/cli.py -url "https://ollama.com" -model "qwen3:0.6b"  -prompt "Summarize the main features." -output-file "summary.txt"'
+Write-Host 'docker compose exec app ./scrapelm -url "https://ollama.com" -model "gemma3:1b"  -prompt "Summarize the main features." -output-file "summary.txt"'

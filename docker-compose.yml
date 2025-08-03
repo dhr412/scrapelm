@@ -29,8 +29,5 @@ services:
       - ollama
     environment:
       - OLLAMA_HOST=http://ollama:11434
-    working_dir: /app
-    volumes:
-      - ./src:/app/src
     tty: true
     command: ["tail", "-f", "/dev/null"]
