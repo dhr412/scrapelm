@@ -42,7 +42,7 @@ jobs:
         fi
         echo "Output file 'build-test.txt' created successfully."
         echo "---"
-        cat build-test.txt
+        cat output/build-test.txt
         echo "---"
 
     - name: Upload test output
