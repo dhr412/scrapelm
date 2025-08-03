@@ -32,11 +32,11 @@ jobs:
           --url "https://ollama.com/blog" \
           --model "gemma3:1b" \
           --prompt "Bullet out the latest four blog posts." \
-          --output-file "build-test.txt"
+          --output-file "/app/output/build-test.txt"
 
     - name: Check for output file
       run: |
-        if [ ! -f build-test.txt ]; then
+        if [ ! -f output/build-test.txt ]; then
           echo "::error::Output file 'build-test.txt' was not created."
           exit 1
         fi
@@ -49,7 +49,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-output
-        path: build-test.txt
+        path: output/build-test.txt
 
     - name: Stop services
       if: always()
