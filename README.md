@@ -30,14 +30,14 @@ This is the easiest way to get started, as it handles all dependencies, includin
     - For Windows (PowerShell):
 
       ```powershell
-      ./run.ps1 gemma3:1b
+      ./build.ps1 gemma3:1b
       ```
 
     - For Linux/macOS:
 
       ```bash
-      chmod +x run.sh
-      ./run.sh gemma3:1b
+      chmod +x build.sh
+      ./build.sh gemma3:1b
       ```
 
     The script will build the Docker containers, start them and pull the Ollama model passed in the argument
