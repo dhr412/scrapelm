@@ -15,11 +15,11 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Make run.sh executable
-      run: chmod +x ./run.sh
+    - name: Make build script executable
+      run: chmod +x ./build.sh
 
     - name: Run setup script
-      run: ./run.sh gemma3:1b
+      run: ./build.sh gemma3:1b
 
     - name: Set up Go
       uses: actions/setup-go@v4
